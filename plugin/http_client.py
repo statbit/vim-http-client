@@ -87,7 +87,7 @@ def do_request(block, buf):
         json_data = json.loads(data)
         data = None
 
-    response = requests.request(method, url, verify=verify_ssl, headers=headers, data=data, files=files, json=json_data)
+    response = requests.request(method, url, verify=verify_ssl, headers=headers, data=data, files=files, json=json_data, allow_redirects=False)
     content_type = response.headers.get('Content-Type', '').split(';')[0]
 
     response_body = response.text
