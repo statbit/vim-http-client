@@ -20,6 +20,7 @@ FILE_REGEX = re.compile("!((?:file)|(?:(?:content)))\((.+)\)")
 JSON_REGEX = re.compile("(javascript|json)$", re.IGNORECASE)
 
 verify_ssl = vim.eval('g:http_client_verify_ssl') == '1'
+follow_redirects = vim.eval('g:http_client_follow_redirects') == '1'
 
 
 def replace_vars(string, variables):
@@ -87,7 +88,7 @@ def do_request(block, buf):
         json_data = json.loads(data)
         data = None
 
-    response = requests.request(method, url, verify=verify_ssl, headers=headers, data=data, files=files, json=json_data, allow_redirects=False)
+    response = requests.request(method, url, verify=verify_ssl, headers=headers, data=data, files=files, json=json_data, allow_redirects=follow_redirects)
     content_type = response.headers.get('Content-Type', '').split(';')[0]
 
     response_body = response.text
