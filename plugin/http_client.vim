@@ -29,6 +29,10 @@ if !exists('http_client_preserve_responses')
   let g:http_client_preserve_responses = 0
 endif
 
+if !exists('http_client_follow_redirects')
+  let g:http_client_follow_redirects = 0
+endif
+
 function! s:DoHTTPRequest()
   if has('python')
     command! -nargs=1 Python python <args>
